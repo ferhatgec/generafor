@@ -9,15 +9,19 @@
 #define GENERAFOR_HPP
 
 #include <iostream>
-#include "FString.hpp"
 
 class Generafor {
 private:
-	FString app_name();
-	FString app_website();
-	FString app_icon();
+	std::string app_name;
+	std::string app_website;
+	std::string app_icon;
+	
+	std::string app_data;
 public:
 	void HelpFunction(char* arg);
+	void GeneratorInfo();
+	
+	void Generator();
 };
 
 #endif /* GENERAFOR_HPP */
