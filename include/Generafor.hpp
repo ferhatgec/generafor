@@ -20,8 +20,9 @@ private:
 public:
 	void HelpFunction(char* arg);
 	void GeneratorInfo();
-	
 	void Generator();
+	
+	void Build();
 };
 
 #endif /* GENERAFOR_HPP */

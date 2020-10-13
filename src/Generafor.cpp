@@ -8,6 +8,9 @@
 #include <iostream>
 #include <Generafor.hpp>
 #include <FileSystemPlusPlus.h>
+#include <ExecutePlusPlus.hpp>
+
+ExecutePlusPlus exec;
 
 void
 Generafor::HelpFunction(char* arg) {
@@ -167,8 +170,24 @@ Generafor::Generator() {
 	else
 		std::cout << "Error. File is exist.\n";
 	
-	if(fsplusplus::IsExistFile("Generafor.vala") == true)
-		std::cout << "Nice!\n";
+	if(fsplusplus::IsExistFile("Generafor.vala") == true) {
+		std::cout << "Nice!\n" <<
+		"Dou you want to build it? (y/n) : ";
+		
+		char ch = getchar();
+		
+		if(ch == 'y' || ch == 'Y')
+			Build();			
+		else
+			std::cout << "Aborted.\n";
+	}
+}
+
+void 
+Generafor::Build() {
+	exec.ExecuteName("Generafor");
+	exec.RunFunction("valac --pkg gtk+-3.0 --pkg webkit2gtk-4.0 Generafor.vala -o app");
+	exec.RunFunction("./app");
 }
 
 int main(int argc, char** argv) {
@@ -179,9 +198,10 @@ int main(int argc, char** argv) {
 	else {
 		std::string _data(argv[1]);
 		
-		if(_data == "--g") {
+		if(_data == "--g")
 			main.GeneratorInfo();
-		}
+		else if(_data == "--b")
+			main.Build();
 	}
 	
 	return 0;
