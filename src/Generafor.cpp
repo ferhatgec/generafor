@@ -172,7 +172,7 @@ Generafor::Generator() {
 	
 	if(fsplusplus::IsExistFile("Generafor.vala") == true) {
 		std::cout << "Nice!\n" <<
-		"Dou you want to build it? (y/n) : ";
+		"Do you want to build it? (y/n) : ";
 		
 		char ch = getchar();
 		
