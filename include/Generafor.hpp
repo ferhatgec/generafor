@@ -15,6 +15,7 @@ private:
 	std::string app_name;
 	std::string app_website;
 	std::string app_icon;
+	std::string app_subtitle;
 	
 	std::string app_data;
 public:

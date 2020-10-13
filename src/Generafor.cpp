@@ -32,6 +32,9 @@ Generafor::GeneratorInfo() {
 	std::cout << app_name + "'s website : ";
 	std::getline(std::cin, app_website);
 	
+	std::cout << app_name + "'s window subtitle: ";
+	std::getline(std::cin, app_subtitle);
+	
 	std::cout << "Generating code.\n";
 	
 	app_data = "/* Use Gtk and Webkit namespaces */\n"
@@ -41,6 +44,7 @@ Generafor::GeneratorInfo() {
 			"public class Discorder : Window {\n"
 			"\t/* Set Window title */\n"
 			"    private const string TITLE = \"" + app_name + "\";\n"
+			"    private const string SUBTITLE = \"" + app_subtitle + "\";\n"
 			"    \n"
 			"    /* Default URL */\n"
 			"    private const string DEFAULT_URL = \"" + app_website + "\";\n"
@@ -66,7 +70,7 @@ Generafor::GeneratorInfo() {
 			"    \twebContext = new WebContext();\n"
 			"\n"
 			"        headerBar.set_title (Discorder.TITLE);\n"
-			"\t\theaderBar.set_subtitle (\"\\'Discording\\' for everyone, everytime.\");\n"
+			"\t\theaderBar.set_subtitle (Discorder.SUBTITLE);\n"
 			"        headerBar.set_show_close_button (true);\n"
 			"\t\t\n"
 			"\n"
