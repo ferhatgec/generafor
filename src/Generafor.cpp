@@ -169,21 +169,25 @@ Generafor::Generator() {
 	
 	std::cout << "Creating file..\n";
 	
-	if(fsplusplus::IsExistFile("Generafor.vala") != true)
-		fsplusplus::CreateFile("Generafor.vala", app_data);
-	else
-		std::cout << "Error. File is exist.\n";
 	
-	if(fsplusplus::IsExistFile("Generafor.vala") == true) {
-		std::cout << "Nice!\n" <<
-		"Do you want to build it? (y/n) : ";
-		
-		char ch = getchar();
-		
-		if(ch == 'y' || ch == 'Y')
-			Build();			
+	if(mkdir((app_name + "_generafor").c_str(), 0777) != -1) {
+		chdir((app_name + "_generafor").c_str());
+		if(fsplusplus::IsExistFile("Generafor.vala") != true)
+			fsplusplus::CreateFile("Generafor.vala", app_data);
 		else
-			std::cout << "Aborted.\n";
+			std::cout << "Error. File is exist.\n";
+	
+		if(fsplusplus::IsExistFile("Generafor.vala") == true) {
+			std::cout << "Nice!\n" <<
+			"Do you want to build it? (y/n) : ";
+		
+			char ch = getchar();
+		
+			if(ch == 'y' || ch == 'Y')
+				Build();			
+			else
+				std::cout << "Aborted.\n";
+		}
 	}
 }
 
