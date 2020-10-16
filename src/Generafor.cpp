@@ -49,7 +49,13 @@ Generafor::GeneratorInfo() {
 	
 	std::cout << "Generating code.\n";
 	
-	app_data = "/* Use Gtk and Webkit namespaces */\n"
+	comment_data = "/* " + app_name + "\n" 
+				"* This file created by Fegeya Generafor.\n"
+				"*/\n";
+	
+	app_data = comment_data;
+	
+	app_data.append("/* Use Gtk and Webkit namespaces */\n"
 			"using Gtk;\n"
 			"using WebKit;\n"
 			"\n"
@@ -151,12 +157,17 @@ Generafor::GeneratorInfo() {
 			"\n"
 			"        return 0;\n"
 			"    }\n"
-			"}";
+			"}");
 		
 		
-		build_data = "#!/bin/sh\n\n"
+		comment_data = "# " + app_name + "\n" 
+				"# This file created by Fegeya Generafor.\n";
+		
+		build_data = comment_data;
+		
+		build_data.append("#!/bin/sh\n\n"
 				"valac --pkg gtk+-3.0 --pkg webkit2gtk-4.0 Generafor.vala -o app\n"
-				"./app\n";
+				"./app\n");
 				
 		std::cout << "Starting. Generator()\n";
 		Generator();
