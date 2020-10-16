@@ -35,6 +35,18 @@ Generafor::GeneratorInfo() {
 	std::cout << app_name + "'s window subtitle: ";
 	std::getline(std::cin, app_subtitle);
 	
+	std::cout << app_name + "'s window x size: ";
+	std::getline(std::cin, window_x);
+
+	if(atoi(window_x.c_str()) < 10)
+		window_x = "800";
+	
+	std::cout << app_name + "'s window y size: ";
+	std::getline(std::cin, window_y);
+	
+	if(atoi(window_y.c_str()) < 10)
+		window_y = "600";
+	
 	std::cout << "Generating code.\n";
 	
 	app_data = "/* Use Gtk and Webkit namespaces */\n"
@@ -72,7 +84,7 @@ Generafor::GeneratorInfo() {
 			"        headerBar.set_show_close_button (true);\n"
 			"\t\t\n"
 			"\n"
-			"       this.set_default_size(800, 600);\n"
+			"       this.set_default_size(" + window_x + ", " + window_y + ");\n"
 			"    \n"
 			"        \n"
 			"        try {\n"

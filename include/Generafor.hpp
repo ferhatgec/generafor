@@ -18,6 +18,9 @@ private:
 	std::string app_subtitle;
 	
 	std::string app_data;
+	
+	std::string window_x;
+	std::string window_y;
 public:
 	void HelpFunction(char* arg);
 	void GeneratorInfo();
