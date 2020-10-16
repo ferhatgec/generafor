@@ -153,6 +153,11 @@ Generafor::GeneratorInfo() {
 			"    }\n"
 			"}";
 		
+		
+		build_data = "#!/bin/sh\n\n"
+				"valac --pkg gtk+-3.0 --pkg webkit2gtk-4.0 Generafor.vala -o app\n"
+				"./app\n";
+				
 		std::cout << "Starting. Generator()\n";
 		Generator();
 }
@@ -162,15 +167,22 @@ Generafor::Generator() {
 	std::cout << "Replacing app_name.\n";
 	std::cout << "Add app_website.\n";
 	
-	std::cout << "Creating file..\n";
-	
-	
 	if(mkdir((app_name + "_generafor").c_str(), 0777) != -1) {
 		chdir((app_name + "_generafor").c_str());
+		std::cout << "Creating make.sh file..\n";
+		
+		if(fsplusplus::IsExistFile("make.sh") != true)
+			fsplusplus::CreateFile("make.sh", build_data);
+		else
+			std::cout << "Error. make.sh is exist.\n";
+	
+	
+		std::cout << "Creating Generafor.vala file..\n";
+			
 		if(fsplusplus::IsExistFile("Generafor.vala") != true)
 			fsplusplus::CreateFile("Generafor.vala", app_data);
 		else
-			std::cout << "Error. File is exist.\n";
+			std::cout << "Error. Generafor.vala is exist.\n";
 	
 		if(fsplusplus::IsExistFile("Generafor.vala") == true) {
 			std::cout << "Nice!\n" <<
@@ -189,8 +201,7 @@ Generafor::Generator() {
 void 
 Generafor::Build() {
 	exec.ExecuteName("Generafor");
-	exec.RunFunction("valac --pkg gtk+-3.0 --pkg webkit2gtk-4.0 Generafor.vala -o app");
-	exec.RunFunction("./app");
+	exec.RunFunction("sh make.sh");
 }
 
 int main(int argc, char** argv) {
