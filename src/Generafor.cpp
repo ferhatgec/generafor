@@ -169,6 +169,14 @@ Generafor::GeneratorInfo() {
 				"valac --pkg gtk+-3.0 --pkg webkit2gtk-4.0 Generafor.vala -o app\n"
 				"./app\n");
 				
+		
+		desktop_data.append("[Desktop Entry]\n"
+				"Name=" + app_name + "\n"
+				"Exec=generafor\n"
+				"Type=Application\n"
+				"Categories=GTK;GNOME;\n"
+				"Terminal=false");   			
+		
 		std::cout << "Starting. Generator()\n";
 		Generator();
 }
@@ -187,7 +195,13 @@ Generafor::Generator() {
 		else
 			std::cout << "Error. make.sh is exist.\n";
 	
-	
+		std::cout << "Creating generafor.desktop file..\n";
+		
+		if(fsplusplus::IsExistFile("generafor.desktop") != true)
+			fsplusplus::CreateFile("generafor.desktop", desktop_data);
+		else
+			std::cout << "Error. generafor.desktop is exist.\n";
+
 		std::cout << "Creating Generafor.vala file..\n";
 			
 		if(fsplusplus::IsExistFile("Generafor.vala") != true)
