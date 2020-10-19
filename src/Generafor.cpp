@@ -47,6 +47,9 @@ Generafor::GeneratorInfo() {
 	if(atoi(window_y.c_str()) < 10)
 		window_y = "600";
 	
+	std::cout << app_name + "'s output name: ";
+	std::getline(std::cin, output);
+
 	std::cout << "Generating code.\n";
 	
 	comment_data = "/* " + app_name + "\n" 
@@ -166,13 +169,13 @@ Generafor::GeneratorInfo() {
 		build_data = comment_data;
 		
 		build_data.append("#!/bin/sh\n\n"
-				"valac --pkg gtk+-3.0 --pkg webkit2gtk-4.0 Generafor.vala -o app\n"
-				"./app\n");
+				"valac --pkg gtk+-3.0 --pkg webkit2gtk-4.0 Generafor.vala -o " + output + "\n"
+				"./" + output + "\n");
 				
 		
 		desktop_data.append("[Desktop Entry]\n"
 				"Name=" + app_name + "\n"
-				"Exec=generafor\n"
+				"Exec=" + output + "\n"
 				"Type=Application\n"
 				"Categories=GTK;GNOME;\n"
 				"Terminal=false");   			

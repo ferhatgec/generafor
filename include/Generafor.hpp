@@ -24,6 +24,8 @@ private:
 
 	std::string window_x;
 	std::string window_y;
+	
+	std::string output;
 public:
 	void HelpFunction(char* arg);
 	void GeneratorInfo();
