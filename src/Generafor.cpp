@@ -166,6 +166,11 @@ Generafor::GeneratorInfo() {
 		comment_data = "# " + app_name + "\n" 
 				"# This file created by Fegeya Generafor.\n";
 		
+		c_code_data = comment_data;
+		
+		c_code_data.append("#!/bin/sh\n\n"
+				"valac -C --pkg gtk+-3.0 --pkg webkit2gtk-4.0 Generafor.vala\n");
+		
 		build_data = comment_data;
 		
 		build_data.append("#!/bin/sh\n\n"
@@ -205,6 +210,14 @@ Generafor::Generator() {
 		else
 			std::cout << "Error. generafor.desktop is exist.\n";
 
+		std::cout << "Creating c_code.sh code..\n";
+
+		if(fsplusplus::IsExistFile("c_code.sh") != true)
+			fsplusplus::CreateFile("c_code.sh", c_code_data);
+		else
+			std::cout << "Error. c_code.sh is exist.\n";
+		
+
 		std::cout << "Creating Generafor.vala file..\n";
 			
 		if(fsplusplus::IsExistFile("Generafor.vala") != true)
@@ -229,6 +242,11 @@ Generafor::Generator() {
 void 
 Generafor::Build() {
 	exec.ExecuteName("Generafor");
+	
+	std::cout << "Running sh c_code.sh..\n";
+	exec.RunFunction("sh c_code.sh");
+	
+	std::cout << "Running sh make.sh..\n";
 	exec.RunFunction("sh make.sh");
 }
 
